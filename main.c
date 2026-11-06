@@ -17,18 +17,26 @@ int main(void) {
   printf("What item would you like to buy?: ");
   fgets(prodName, sizeof(prodName), stdin);
 
+  if (prodName[0] == '\n' || prodName[1] == '\0' ){
+    printf("Invalid Name");
+    return 1;
+  }
+
   printf("What is the price?: ");
   scanf("%lf", &price);
+
+  if (price <= 0) {
+    printf("Invalid Price");
+    return 1;
+  }
 
   printf("How many would you like?: ");
   scanf("%d", &quantity);
 
-  if (price <= 0 && quantity <= 0) {
-    printf("Invalid Price and Quantity");
-  } else if (price <= 0) {
-    printf("Invalid Price");
-  } else if (quantity <= 0) {
-    printf("Invalid Quantity");
+  if (quantity <= 0) {
+    printf("Invalid quantity");
+    return 1;
+
   } else {
     getReceipt(prodName, price, quantity);
   }
